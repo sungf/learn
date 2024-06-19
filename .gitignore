@@ -1,0 +1,16 @@
+# IDE / Editor
+.idea
+
+# Service worker
+sw.*
+
+# macOS
+.DS_Store
+
+# Vim swap files
+*.swp
+
+# package-lock.json
+.vscode
+
+!/env/*
