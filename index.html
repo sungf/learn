@@ -29,6 +29,9 @@
             width: 100%;
             grid-column: 1 / -1;
         }
+        .h-auto{
+            height: auto;
+        }
         .highlight{
             position: relative;
             margin: 0;
@@ -47,6 +50,15 @@
             right: .75em;
             top: .75em;
             opacity:0;
+        }
+        .text-right{
+            text-align: right;
+        }
+        .p-1{
+            padding: 1rem;
+        }
+        .box-sizing{
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -103,6 +115,9 @@
                 </li>
             </ul>
         </div>
+        <footer class="full-bleed text-right h-auto p-1 box-sizing">
+            <p><a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2024066934号-1</a></p>
+        </footer>
     </section>
     <script>
         document.querySelectorAll('.bd-copy').forEach((btn) => {
