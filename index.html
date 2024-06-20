@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>codeing</title>
-    <link rel="stylesheet" src="/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/bulma.min.css">
     <style>
+        html,
         body{
-            margin: 0;
+            height: 100vh;
+            scrollbar-color: transparent transparent; 
+            scrollbar-width: 0px;
         }
         .container-grid {
-            --limit-container-width: 65ch;
+            --limit-container-width: 68.6%;
             --gutter: 1rem;
             display: grid;
             grid-template-columns: 1fr  minmax(min-content,var(--limit-container-width)) 1fr;
             column-gap: var(--gutter);
             height: 100vh;
-            overflow-y:auto;
-            scroll-snap-type: y mandatory;
+            /* overflow-y:auto; */
+            overflow-y: auto;
+            scroll-snap-type:y mandatory;
+            /* scrollbar-color: transparent transparent; 
+            scrollbar-width: 0px; */
         }
         .container-grid > * {
             grid-column: 2;
@@ -62,63 +68,71 @@
         }
     </style>
 </head>
-<body>
-    <section class="container-grid">
-        <div>
-            <h1>blob 转 base64</h1>
-            <figure class="highlight">
-                <pre>
-                    const reader = new FileReader();
-                    reader.onload = function() {
-                        const base64 = reader.result.split(',')[1];
-                        console.log(base64);
-                    };
-                    reader.readAsDataURL(blob);
-                </pre>
-                <button class="button bd-copy">Copy</button>
-            </figure>
-            
-        </div>
-        <div>
-            <h1>base64 转 blob</h1>
-            <figure class="highlight">
-                <pre>
-                function base64ToBlob(base64) {
-                    const arr = base64.split(',');
-                    const mime = arr[0].match(/:(.*?);/)[1];
-                    const bstr = atob(arr[1]);
-                    let n = bstr.length;
-                    const u8arr = new Uint8Array(n);
-                    while (n--) {
-                        u8arr[n] = bstr.charCodeAt(n);
-                    }
-                    return new Blob([u8arr], { type: mime });
-                }
-                </pre>
-                <button class="button bd-copy">Copy</button>
-            </figure>
-        </div>
-        <div>
-            <h1>收藏</h1>
-            <ul>
-                <li>
-                    <a href="https://certbot.eff.org/" target="_blank">Certbot: https 证书</a>
-                </li>
-                <li>
-                    <a href="https://www.zhangxinxu.com/" target="_blank">张鑫旭</a>
-                </li>
-                <li>
-                    <a href="https://www.ruanyifeng.com/" target="_blank">阮一峰</a>
-                </li>
-                <li>
-                    <a href="https://sspai.com/" target="_blank">少数派</a>
-                </li>
-            </ul>
-        </div>
-        <footer class="full-bleed text-right h-auto p-1 box-sizing">
-            <p><a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2024066934号-1</a></p>
-        </footer>
-    </section>
+<body >
+        <section class="container-grid">
+            <div>
+                <div class="fixed-grid has-2-cols">
+                    <div class="grid">
+                        <div class="cell">
+                            <h1>blob 转 base64</h1>
+                            <figure class="highlight">
+                                <pre>
+    const reader = new FileReader();
+    reader.onload = function() {
+        const base64 = reader.result.split(',')[1];
+        console.log(base64);
+    };
+    reader.readAsDataURL(blob);
+                                </pre>
+                                <button class="button bd-copy">Copy</button>
+                            </figure>
+                        </div>
+                        <div class="cell">
+                            <h1>base64 转 blob</h1>
+                            <figure class="highlight">
+                                <pre>
+    function base64ToBlob(base64) {
+        const arr = base64.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    }
+                                </pre>
+                                <button class="button bd-copy">Copy</button>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            222333
+            </div>
+            <div>
+                <h1>List</h1>
+                <ul>
+                    <li>
+                        <a href="https://certbot.eff.org/" target="_blank">Certbot: https 证书</a>
+                    </li>
+                    <li>
+                        <a href="https://www.zhangxinxu.com/" target="_blank">张鑫旭</a>
+                    </li>
+                    <li>
+                        <a href="https://www.ruanyifeng.com/" target="_blank">阮一峰</a>
+                    </li>
+                    <li>
+                        <a href="https://sspai.com/" target="_blank">少数派</a>
+                    </li>
+                </ul>
+            </div>
+            <footer class="full-bleed text-right h-auto p-1 box-sizing">
+                <p><a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2024066934号-1</a></p>
+            </footer>
+        </section>
     <script>
         document.querySelectorAll('.bd-copy').forEach((btn) => {
             btn.addEventListener('click', () => {
