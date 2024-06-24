@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiper9</title>
+    <link rel="stylesheet" href="/css/swiper/swiper-bundle.min.css">
+    <style>
+        .swiper-container {
+            width: 98%;
+            background: #f5f5f5;
+            margin: 0 auto;
+            padding: 10px;
+            
+        }
+        .swiper-wrapper{
+           
+        }
+        .swiper-slide {
+           background: #fff;
+           width: 25.13%;
+           aspect-ratio: 1/1;
+           transition: 0.5s;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+        .active{
+            background: #ff6685;
+            width: 31.640625%;
+        }
+    </style>
+</head>
+<body>
+    <div class="swiper-container swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" >Slide 1</div>
+          <div class="swiper-slide ">Slide 2</div>
+          <div class="swiper-slide active">Slide 3</div>
+           <div class="swiper-slide">Slide 4</div>
+         <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide">Slide 6</div>
+        <div class="swiper-slide">Slide 7</div>
+        </div>
+      </div>
+    
+      <script src="/js/swiper/swiper-bundle.min.js"></script>
+    
+      <script>
+        let isClickEvent = false;
+        // const swiper = new Swiper('.swiper-container');
+        // Optional parameters
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            // slideToClickedSlide:true,
+            spaceBetween: 12,
+            
+        });
+            swiper.on('slideChange', function () {
+                if(isClickEvent){
+                    return;
+                }
+                isClickEvent = true;
+                const previousIndex = swiper.previousIndex;
+                const realIndex = swiper.realIndex;
+                console.log(previousIndex, realIndex);
+                const activeIndex = Array.from(swiper.slides).findIndex(el => el.classList.contains('active'));
+                const prevIndex = parseInt(activeIndex) - 1;
+                let nextIndex = parseInt(activeIndex) + 1;
+                if(previousIndex > realIndex){
+                    // 向前
+                    swiper.slides[activeIndex].classList.remove('active');
+                    swiper.slides[prevIndex].classList.add('active');
+                    swiper.slideTo(prevIndex>2?prevIndex-2:0);
+                }else if(previousIndex < realIndex){
+                    if(nextIndex<3){
+                        nextIndex=3
+                    }
+                    // 向后
+                    swiper.slides[activeIndex].classList.remove('active');
+                    swiper.slides[nextIndex].classList.add('active');
+                    swiper.slideTo(nextIndex>2?nextIndex-2:0);
+                }
+                setTimeout(() => {
+                    isClickEvent = false;
+                }, 0);
+            });
+              // 点击切换slide
+            swiper.on('click', function () {
+                isClickEvent = true;
+                const clickedSlide = swiper.slides[swiper.clickedIndex];
+                if (!clickedSlide.classList.contains('active')) {
+                    // document.querySelector('.swiper-slide.active')?.classList.remove('active');
+                    swiper.wrapperEl.querySelector('.swiper-slide.active')?.classList.remove('active');
+                    clickedSlide.classList.add('active');
+                }
+                swiper.slideTo(swiper.clickedIndex > 2 ? swiper.clickedIndex - 2 : 0);
+                 // 重置标志变量为false
+                setTimeout(() => {
+                    isClickEvent = false;
+                }, 0);
+            });
+      </script>
+</body>
+</html>
